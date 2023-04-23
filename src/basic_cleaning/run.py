@@ -4,6 +4,7 @@
 """
 import argparse
 import logging
+import pandas as pd
 import wandb
 
 
@@ -18,11 +19,30 @@ def go(args):
 
     # Download input artifact. This will also log that this script is using this
     # particular version of the artifact
-    # artifact_local_path = run.use_artifact(args.input_artifact).file()
+    logging.info(f"Download the input artifact {args.input_artifact}")
+    artifact_local_path = run.use_artifact(args.input_artifact).file()
 
-    ######################
-    # YOUR CODE HERE     #
-    ######################
+    logging.info("Read raw data")
+    raw_df = pd.read_csv(artifact_local_path)
+
+    logging.info("Begin data cleaning")
+    logging.info("Drop outliers")
+    idx = raw_df['price'].between(args.min_price, args.max_price)
+    df = raw_df[idx].copy()
+
+    logging.info("Convert last_review to datetime")
+    df['last_review'] = pd.to_datetime(df['last_review'])
+    logging.info("Save clean data")
+    df.to_csv("clean_sample.csv", index=False)
+
+    logging.info("Upload clean data to W&B")
+    artifact = wandb.Artifact(
+        args.output_artifact,
+        type=args.output_type,
+        description=args.output_description,
+    )
+    artifact.add_file("clean_sample.csv")
+    run.log_artifact(artifact)
 
 
 if __name__ == "__main__":
@@ -32,43 +52,43 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--input_artifact", 
-        type=str, ## INSERT TYPE HERE: str, float or int,
-        help="",## INSERT DESCRIPTION HERE,
+        type=str,
+        help="Raw data as csv",
         required=True
     )
 
     parser.add_argument(
         "--output_artifact", 
-        type=str,## INSERT TYPE HERE: str, float or int,
-        help="",## INSERT DESCRIPTION HERE,
+        type=str,
+        help="Cleaned data as csv",
         required=True
     )
 
     parser.add_argument(
         "--output_type", 
-        type=str,## INSERT TYPE HERE: str, float or int,
-        help="", ## INSERT DESCRIPTION HERE,
+        type=str,
+        help="Type of the output",
         required=True
     )
 
     parser.add_argument(
         "--output_description", 
-        type=str,## INSERT TYPE HERE: str, float or int,
-        help="",## INSERT DESCRIPTION HERE,
+        type=str,
+        help="Cleaned data",
         required=True
     )
 
     parser.add_argument(
         "--min_price", 
-        type=str,## INSERT TYPE HERE: str, float or int,
-        help="",## INSERT DESCRIPTION HERE,
+        type=int,
+        help="minimum price to cap",
         required=True
     )
 
     parser.add_argument(
         "--max_price", 
-        type=str,## INSERT TYPE HERE: str, float or int,
-        help="",## INSERT DESCRIPTION HERE,
+        type=int,
+        help="maximum price to cap",
         required=True
     )
 

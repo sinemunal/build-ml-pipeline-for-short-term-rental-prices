@@ -6,28 +6,28 @@ entry_points:
     parameters:
 
       input_artifact:
-        description: ## ADD DESCRIPTION
+        description: Raw data as csv
         type: string
 
       output_artifact:
-        description: ## ADD DESCRIPTION
+        description: Cleaned data as csv
         type: string
 
       output_type:
-        description: ## ADD DESCRIPTION
+        description: Type of the output
         type: string
 
       output_description:
-        description: ## ADD DESCRIPTION
+        description: Cleaned data
         type: string
 
       min_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: minimum price to cap
+        type: int
 
       max_price:
-        description: ## ADD DESCRIPTION
-        type: string
+        description: maximum price to cap
+        type: int
 
 
     command: >-
