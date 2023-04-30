@@ -135,6 +135,15 @@ def go(args):
 
 
 def plot_feature_importance(pipe, feat_names):
+    """
+    Calculates and plots the feature importance for a given
+    pipeline and features.
+
+    pipe: trained sklearn pipeline
+    feat_names: list of feature names
+
+    Returns plot of feature importance
+    """
     # We collect the feature importance for all non-nlp features first
     feat_imp = pipe["random_forest"].feature_importances_[: len(feat_names)-1]
     # For the NLP feature we sum across all the TF-IDF dimensions into a global
@@ -151,6 +160,14 @@ def plot_feature_importance(pipe, feat_names):
 
 
 def get_inference_pipeline(rf_config, max_tfidf_features):
+    """
+    For given model parameters, constructs a pipeline for inference.
+
+    rf_config: dict of random forest regressor parameters.
+    max_tfidf_features: integer, maximum number of words to consider for the TFIDF
+
+    Returns sklearn inference pipeline and processed features
+    """
     # Let's handle the categorical features first
     # Ordinal categorical are categorical values for which the order is meaningful, for example
     # for room type: 'Entire home/apt' > 'Private room' > 'Shared room'
