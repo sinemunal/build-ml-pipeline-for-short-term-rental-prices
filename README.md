@@ -1,19 +1,13 @@
 # Build an ML Pipeline for Short-Term Rental Prices in NYC
-You are working for a property management company renting rooms and properties for short periods of 
+This project contains a solution to the second course in the Udacity Machine Learning DevOps Engineer nanodegree.
+It is forked from the corresponding Github project and code is developed on top of it for the project submission.
+
+"You are working for a property management company renting rooms and properties for short periods of 
 time on various rental platforms. You need to estimate the typical price for a given property based 
 on the price of similar properties. Your company receives new data in bulk every week. The model needs 
 to be retrained with the same cadence, necessitating an end-to-end pipeline that can be reused.
 
-In this project you will build such a pipeline.
-
-## Relevant Links
-One can access the corresponding W&B project used for Udacity project via the following link below:
-
-https://wandb.ai/sinemunal/nyc_airbnb
-
-The Github project:
-
-https://github.com/sinemunal/build-ml-pipeline-for-short-term-rental-prices
+In this project you will build such a pipeline."
 
 ## Table of contents
 
