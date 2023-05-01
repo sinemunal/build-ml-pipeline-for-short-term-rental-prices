@@ -6,6 +6,15 @@ to be retrained with the same cadence, necessitating an end-to-end pipeline that
 
 In this project you will build such a pipeline.
 
+## Relevant Links
+One can access the corresponding W&B project used for Udacity project via the following link below:
+
+https://wandb.ai/sinemunal/nyc_airbnb
+
+The Github project:
+
+https://github.com/sinemunal/build-ml-pipeline-for-short-term-rental-prices
+
 ## Table of contents
 
 - [Introduction](#build-an-ML-Pipeline-for-Short-Term-Rental-Prices-in-NYC)
